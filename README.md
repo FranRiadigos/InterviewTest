@@ -1,7 +1,7 @@
 # Skeleton Project for Interview Tests
 
 An Android Project for developers to use as a template in order to speed up building
-a challenge test from scratch.
+a interview test from scratch.
 
 You can read what decisions and considerations were taken while developing this sample in
 the following article:
