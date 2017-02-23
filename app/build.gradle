@@ -1,0 +1,85 @@
+apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId rootProject.ext.androidApplicationId
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner rootProject.ext.testInstrumentationRunner
+
+        buildConfigField "String", "API_URL", "\"http://jsonplaceholder.typicode.com/\""
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    packagingOptions {
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    lintOptions {
+        quiet true
+        abortOnError false
+        ignoreWarnings true
+        disable 'InvalidPackage'
+        disable 'OldTargetApi'
+    }
+
+    buildTypes {
+        debug {
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    def appDependencies = rootProject.ext.appDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    compile (
+            appDependencies.dagger,
+            appDependencies.butterKnife,
+            appDependencies.recyclerView,
+            appDependencies.rxJava,
+            appDependencies.rxAndroid,
+            appDependencies.fresco,
+            appDependencies.design,
+            appDependencies.leakCanary,
+            appDependencies.fragmentArgs,
+
+            project(':domain'),
+            project(':data'),
+    )
+
+    testCompile (
+            testDependencies.junit,
+            testDependencies.assertj,
+            testDependencies.mockito,
+            testDependencies.mockWebServer,
+            testDependencies.leakCanaryNoOp,
+    )
+
+    androidTestCompile(testDependencies.espressoContrib) {
+        exclude module: "support-annotations"
+        exclude module: "support-v4"
+        exclude module: "design"
+        exclude module: "recyclerview-v7"
+    }
+
+    annotationProcessor appDependencies.fragmentArgsCompiler
+    annotationProcessor appDependencies.butterKnifeCompiler
+    annotationProcessor appDependencies.daggerCompiler
+}

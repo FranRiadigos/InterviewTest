@@ -1,0 +1,57 @@
+ext {
+    //Android
+    supportVersion = '25.1.1'
+
+    //Libraries
+    daggerVersion = '2.8'
+    butterKnifeVersion = '8.5.1'
+    rxJavaVersion = '1.1.5'
+    rxAndroidVersion = '1.2.0'
+    javaxAnnotationVersion = '1.0'
+    gsonVersion = '2.3'
+    retrofitVersion = '2.2.0'
+    retrofitGsonVersion = '2.2.0'
+    retrofitRxAdapterVersion = '2.2.0'
+    frescoVersion = '1.0.1'
+    leakCanaryVersion = '1.5'
+    fragmentArgsVersion = '3.0.2'
+
+    //Testing
+    jUnitVersion = '4.12'
+    assertJVersion = '1.7.1'
+    mockitoVersion = '1.9.5'
+    espressoContribVersion = '2.2.2'
+    testingSupportLibVersion = '0.1'
+    mockWebServerVersion = '3.6.0'
+
+    appDependencies = [
+            daggerCompiler:             "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger:                     "com.google.dagger:dagger:${daggerVersion}",
+            butterKnife:                "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterKnifeCompiler:        "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+            recyclerView:               "com.android.support:recyclerview-v7:${supportVersion}",
+            design:                     "com.android.support:design:${supportVersion}",
+            rxJava:                     "io.reactivex:rxjava:${rxJavaVersion}",
+            rxAndroid:                  "io.reactivex:rxandroid:${rxAndroidVersion}",
+            androidAnnotations:         "com.android.support:support-annotations:${supportVersion}",
+            javaxAnnotation:            "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            gson:                       "com.google.code.gson:gson:${gsonVersion}",
+            retrofit:                   "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitGson:               "com.squareup.retrofit2:converter-gson:${retrofitGsonVersion}",
+            retrofitRxAdapter:          "com.squareup.retrofit2:adapter-rxjava:${retrofitRxAdapterVersion}",
+            fresco:                     "com.facebook.fresco:fresco:${frescoVersion}",
+            leakCanary:                 "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}",
+            fragmentArgs:               "com.hannesdorfmann.fragmentargs:annotation:${fragmentArgsVersion}",
+            fragmentArgsCompiler:       "com.hannesdorfmann.fragmentargs:processor:${fragmentArgsVersion}",
+    ]
+
+    testDependencies = [
+            junit:                  "junit:junit:${jUnitVersion}",
+            assertj:                "org.assertj:assertj-core:${assertJVersion}",
+            mockito:                "org.mockito:mockito-core:${mockitoVersion}",
+            mockWebServer:          "com.squareup.okhttp3:mockwebserver:${mockWebServerVersion}",
+            espressoContrib:        "com.android.support.test.espresso:espresso-contrib:${espressoContribVersion}",
+            testingSupportLib:      "com.android.support.test:testing-support-lib:${testingSupportLibVersion}",
+            leakCanaryNoOp:         "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}",
+    ]
+}

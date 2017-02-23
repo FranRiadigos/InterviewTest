@@ -1,0 +1,38 @@
+apply plugin: 'java'
+apply plugin: 'me.tatarka.retrolambda'
+
+//noinspection GroovyUnusedAssignment
+sourceCompatibility = JavaVersion.VERSION_1_8
+//noinspection GroovyUnusedAssignment
+targetCompatibility = JavaVersion.VERSION_1_8
+
+// http://andersmurphy.com/2015/09/16/setting-up-retrolambda/
+retrolambda {
+    jdk JAVA8_HOME
+    oldJdk JAVA7_HOME
+    javaVersion JavaVersion.VERSION_1_7
+}
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main {
+        compileClasspath += configurations.provided
+    }
+}
+
+dependencies {
+    def appDependencies = rootProject.ext.appDependencies
+    def testDependencies = rootProject.ext.testDependencies
+
+    compile appDependencies.dagger
+    compile appDependencies.rxJava
+
+    testCompile testDependencies.junit
+    testCompile testDependencies.mockito
+
+    provided appDependencies.daggerCompiler
+    provided appDependencies.javaxAnnotation
+}
