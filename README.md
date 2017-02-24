@@ -17,6 +17,10 @@ Some frequently questions you might be asking
 
 Have a view into _/data/src/test/_ `MockResponseDispatcher` class and see how it is handled.
 
+```java
+new File(classLoader.getResource(fileName).getFile())
+```
+
 #### How can I chain and make parallel requests with RxJava and Retrofit?
 
 Look straight into the _/data/.../interactor/_ `GetPostList` class and you'll find a particular strategy
@@ -32,7 +36,13 @@ Pay a special attention into the _/app/src/androidTest/.../feature/_ `EspressoTe
 #### How can I override default Schedulers?
 
 Have a look into the _/data/src/test/_ `RxJavaTestRunner` class and you will see Hooks implementation
-for RxJava v1.2
+and how to use it for RxJava v1.2
+
+```java
+RxJavaHooks.reset();
+RxJavaHooks.setOnIOScheduler(scheduler -> Schedulers.immediate());
+RxJavaHooks.setOnNewThreadScheduler(scheduler -> Schedulers.immediate());
+```
 
 #### How can I deal with Threads in RxJava (Unit Tests specific)?
 
