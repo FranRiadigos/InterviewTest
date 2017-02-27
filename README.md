@@ -31,7 +31,7 @@ processors in the device, to achieve the parallelism execution.
 
 Pay a special attention into the _/app/src/androidTest/.../feature/_ `EspressoTest` class.
 
-**Remember you need to attach `EspressoTestRunner` to your Run/Debug Configurations in Android Studio.**
+> Remember you need to attach `EspressoTestRunner` to your Run/Debug Configurations in Android Studio.
 
 #### How can I override default Schedulers?
 
