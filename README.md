@@ -6,7 +6,7 @@ a interview test from scratch.
 You can read what decisions and considerations were taken while developing this sample in
 the following article:
 
-[Android Technical Interview Test](https://medium.com/@kuassivi/android-technical-interview-test-2b4794aa0070)
+[Technical Interview Tests](https://medium.com/@kuassivi/technical-interview-tests-2b4794aa0070)
 
 
 
