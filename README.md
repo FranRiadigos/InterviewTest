@@ -1,81 +1,82 @@
 # Skeleton Project for Interview Tests
 
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-InterviewTest-brightgreen.svg?style=flat)](https://android-arsenal.com/details/3/5377)
+
 An Android Project for developers to use as a template in order to speed up building
 a interview test from scratch.
 
 You can read what decisions and considerations were taken while developing this sample in
 the following article:
 
-[Technical Interview Tests](https://medium.com/@kuassivi/technical-interview-tests-2b4794aa0070)
-
+**Medium:** [Technical Interview Tests](https://medium.com/@kuassivi/technical-interview-tests-2b4794aa0070)
 
 
 Some frequently questions you might be asking
 -
 
-#### How can I test large amount of data from a mocked request like a JSON file?
+* **How can I test large amount of data from a mocked request like a JSON file?**
 
-Have a view into _/data/src/test/_ `MockResponseDispatcher` class and see how it is handled.
+   Have a view into _/data/src/test/_ `MockResponseDispatcher` class and see how it is handled.
 
-```java
-new File(classLoader.getResource(fileName).getFile())
-```
+    ```java
+    new File(classLoader.getResource(fileName).getFile())
+    ```
 
-#### How can I chain and make parallel requests with RxJava and Retrofit?
+* **How can I chain and make parallel requests with RxJava and Retrofit?**
 
-Look straight into the _/data/.../interactor/_ `GetPostList` class and you'll find a particular strategy
-that uses `groupBy` and `flatMap` [RxJava Operators][16] plus the number of available
-processors in the device, to achieve the parallelism execution.
+    Look straight into the _/data/.../interactor/_ `GetPostList` class and you'll find a particular strategy
+    that uses `groupBy` and `flatMap` [RxJava Operators][16] plus the number of available
+    processors in the device, to achieve the parallelism execution.
 
-#### How can I take control of Dagger 2 modules and implement `IdlingResource` in Espresso tests?
+* **How can I take control of Dagger 2 modules and implement `IdlingResource` in Espresso tests?**
 
-Pay a special attention into the _/app/src/androidTest/.../feature/_ `EspressoTest` class.
+    Pay a special attention into the _/app/src/androidTest/.../feature/_ `EspressoTest` class.
 
-> Remember you need to attach `EspressoTestRunner` to your Run/Debug Configurations in Android Studio.
+    Remember you need to attach `EspressoTestRunner` to your Run/Debug Configurations in Android Studio.
 
-#### How can I override default Schedulers?
+* **How can I override default Schedulers?**
 
-Have a look into the _/data/src/test/_ `RxJavaTestRunner` class and you will see Hooks implementation
-and how to use it for RxJava v1.2
+    Have a look into the _/data/src/test/_ `RxJavaTestRunner` class and you will see Hooks implementation
+    and how to use it for RxJava v1.2
 
-```java
-RxJavaHooks.reset();
-RxJavaHooks.setOnIOScheduler(scheduler -> Schedulers.immediate());
-RxJavaHooks.setOnNewThreadScheduler(scheduler -> Schedulers.immediate());
-```
+    ```java
+    RxJavaHooks.reset();
+    RxJavaHooks.setOnIOScheduler(scheduler -> Schedulers.immediate());
+    RxJavaHooks.setOnNewThreadScheduler(scheduler -> Schedulers.immediate());
+    ```
 
-#### How can I deal with Threads in RxJava (Unit Tests specific)?
+* **How can I deal with Threads in RxJava (Unit Tests specific)?**
 
-The quick answer is by using `TestScheduler` class.
+    The quick answer is by using `TestScheduler` class.
 
-Although in order to use it properly, you must implement your code with the ability
-to pass the `Scheduler` you want as a parameter, normally in the constructor of your class.
+    Although in order to use it properly, you must implement your code with the ability
+    to pass the `Scheduler` you want as a parameter, normally in the constructor of your class.
 
-```java
-public interface ThreadExecutor {
-    Scheduler getScheduler();
-}
-
-...
-
-public class ClassToBeTested {
-    public ClassToBeTested(ThreadExecutor executor) {
-        // any implementation that uses ThreadExecutor#getScheduler()
+    ```java
+    public interface ThreadExecutor {
+        Scheduler getScheduler();
     }
-}
 
-...
+    ...
 
-ThreadExecutor mockThreadExecutor = mock(ThreadExecutor.class);
-ClassToBeTested classToBeTested = new ClassToBeTested(mockThreadExecutor);
+    public class ClassToBeTested {
+        public ClassToBeTested(ThreadExecutor executor) {
+            // any implementation that uses ThreadExecutor#getScheduler()
+        }
+    }
 
-TestScheduler testScheduler = new TestScheduler();
-given(mockThreadExecutor.getScheduler()).willReturn(testScheduler);
+    ...
 
-// An execution that uses that Scheduler
-classToBeTested.execute();
-testScheduler.triggerActions();
-```
+    ThreadExecutor mockThreadExecutor = mock(ThreadExecutor.class);
+    ClassToBeTested classToBeTested = new ClassToBeTested(mockThreadExecutor);
+
+    TestScheduler testScheduler = new TestScheduler();
+    given(mockThreadExecutor.getScheduler()).willReturn(testScheduler);
+
+    // An execution that uses that Scheduler
+    classToBeTested.execute();
+    testScheduler.triggerActions();
+    ```
 
 
 Main Technologies
