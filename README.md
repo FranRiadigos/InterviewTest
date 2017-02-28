@@ -3,12 +3,13 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-InterviewTest-brightgreen.svg?style=flat)](https://android-arsenal.com/details/3/5377)
 
 An Android Project for developers to use as a template in order to speed up building
-a interview test from scratch.
+an interview test from scratch.
 
 You can read what decisions and considerations were taken while developing this sample in
 the following article:
 
-**Medium:** [Technical Interview Tests](https://medium.com/@kuassivi/technical-interview-tests-2b4794aa0070)
+**medium:** [Technical Interview Tests](https://medium.com/@kuassivi/technical-interview-tests-2b4794aa0070)
+
 
 
 Some frequently questions you might be asking
