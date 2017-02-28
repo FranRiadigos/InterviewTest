@@ -11,7 +11,6 @@ the following article:
 **Medium:** [Technical Interview Tests](https://medium.com/@kuassivi/technical-interview-tests-2b4794aa0070)
 
 
-
 Some frequently questions you might be asking
 -
 
