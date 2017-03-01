@@ -58,7 +58,7 @@ The Skeleton App shows a list of Posts with its user avatar and a Detail page fo
 
 Once I have created the project structure I start from the domain layer, because this is the module that defines the business contract and logic I will use. At first, I need to introduce some plain objects representing the business data, and since I have access to some samples of the JSON format, I can make use of some [Json2Java](http://www.jsonschema2pojo.org/) website generator and place straight away my new objects into that layer faster than doing it manually.
 
-### Considerations
+#### Considerations
 My first consideration is then whether it worthwhile to generate getters and setters on these business objects, because you might be keen of placing any logic right into them, like the following:
 
 ```java
