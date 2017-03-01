@@ -93,7 +93,7 @@ Subscription subscription = getCommentSizeUseCase.execute(testSubscriber, mock(G
 testScheduler.triggerActions();
 ```
 
-### Testing
+#### Testing
 Once I have finished writing the first business classes, even if I haven’t implemented everything, I can start preparing some [Unit Test](https://developer.android.com/training/testing/unit-testing/index.html) without building any data service or any UI component. Actually this looks pretty much like a [TDD First](https://www.versionone.com/agile-101/agile-software-programming-best-practices/test-first-programming/) approach, and **that** could be one of the questions an interviewer wants to ask you about.
 
 What only matters in the _Domain_ sample, in terms of unit tests, are the `UseCase`’s implementations, since plain objects do not really contribute with any significant logic as well as interfaces, so you should avoid testing some sort of objects like entities or [pojos](https://en.wikipedia.org/wiki/Plain_old_Java_object), but _Model Views_ might be a candidate for a test though, and that should only happen in the presentation layer.
@@ -121,26 +121,26 @@ Aside from what it’s been said before, also follow these advices:
 
 Next decision to be made is what type of [Android HTTP Client](https://developer.android.com/reference/org/apache/http/client/HttpClient.html) you will be using in the project.
 
-### Considerations
+#### Considerations
 I could go for [Volley](https://developer.android.com/training/volley/index.html), [Retrofit](https://square.github.io/retrofit/) or my own implementation using [OkHttp](http://square.github.io/okhttp/) or [Apache HttpClient](http://hc.apache.org/httpcomponents-client-ga/), it does not really matter, but choose one you know well.
 
 To be as short as posible, you should skip developing a _datasource_ or a cache _[strategy](https://github.com/kuassivi/RepositoryCache)_, unless required, and focus on your [Repository](https://msdn.microsoft.com/en-us/library/ff649690.aspx) implementation. If the interviewer really wants to know more upon this approach, they will probably ask you such scenario later.
 
-### Testing
+#### Testing
 Time to test both the _Repository_ implementation and their associated [Rest Services](http://docs.oracle.com/javaee/6/tutorial/doc/gijqy.html). These processes are a very inner execution, so I didn’t have a way nor the need to supply a [Scheduler](https://github.com/ReactiveX/RxJava/wiki/Scheduler) for them, like I did in the `UseCase` classes, therefor to test those functionalities I should rely on a default execution of some [Observable](http://reactivex.io/documentation/contract.html) object. Testing such `Observable` needs to be immediate, so let’s use an own **runner** to override the default `Schedulers` and test this implementation on a [mocked server](https://github.com/square/okhttp/tree/master/mockwebserver).
 
 ## Presentation Layer
 
 The presentation layer is probably the most convoluted part of the project, since you might go for very different structures that all match with a [layered architecture](https://www.oreilly.com/ideas/software-architecture-patterns/page/2/layered-architecture).
 
-### Considerations
+#### Considerations
 Instead of hindering someone to understand the code with a [MVVM Pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) or so, I chose to go for a simple [MVP Design Pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93presenter) and a [Package by Features](https://medium.com/@cesarmcferreira/package-by-features-not-layers-2d076df1964d) approach (for the _presentation_ layer only).
 
 In my implementation, any view will be based on a `Fragment`, so I managed to create a `DispatcherActivity` to handle it.
 
 In order to introduce [Inversion of control](https://martinfowler.com/bliki/InversionOfControl.html) in this skeleton project, I make use of [Dagger 2](https://google.github.io/dagger/) as a logic dependency injector and [Butterknife](http://jakewharton.github.io/butterknife/) as a view component binding.
 
-### Testing
+#### Testing
 Normally one of the purposes of having a [MVP Design Pattern](https://antonioleiva.com/mvp-android/) is to isolate all the logic into the Presenter and let all UI stuff to belong to the View. Hence I decoupled all Android specific dependencies from the Presenter, so I could easily **mocked the View interface in a Unit Test**, execute all the functionalities, assess the Presenter, and assert the mocked View is firing properly.
 
 In order to check the [Acceptance Criteria](https://nomad8.com/acceptance_criteria/) of the UI part of the App, I made use of the [Android Espresso API](https://google.github.io/android-testing-support-library/docs/espresso/), which is also designed to care itself about some async executions through the `AsyncTask` object. However, in some cases, usually in a real project, you might probably want to use your own `Executor` or other components like the [Schedulers](http://reactivex.io/documentation/scheduler.html) of _RxJava_.
