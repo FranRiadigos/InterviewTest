@@ -22,25 +22,25 @@ By this way, you can easily separate your project into 3 layers, described withi
 * One Java library called **_system_**, a module that doesn’t belong to any particular layered architecture but which might contains primary files like third party library dependencies, default JSON/XML config files, property files, some scripts, and any other file related to a build system.
 
 <p align="center">
-  <img src="/images/system.png"/>
+  <img src="images/system.png"/>
 </p>
 
 * Another Java library called **_domain_**, that contains only business logic, and completely decoupled from the Android framework.
 
 <p align="center">
-  <img src="/images/domain.png"/>
+  <img src="images/domain.png"/>
 </p>
 
 * An Android library called **_data_**, that contains all related data and middleware services as well as provider implementations.
 
 <p align="center">
-  <img src="/images/data.png"/>
+  <img src="images/data.png"/>
 </p>
 
 * As last but not least, the application module called **_app_**, which deals with all the UI logics, fully coupled with the Android Framework, it has the responsibility of interacting straight with the end user.
 
 <p align="center">
-  <img src="/images/app.png"/>
+  <img src="images/app.png"/>
 </p>
 
 
@@ -114,7 +114,7 @@ Aside from what it’s been said before, also follow these advices:
 * Make all assumptions you need to guarantee your code works as expected, but try to **refactor** some repetitive logic into private methods, making the code more **readable**.
 
 <p align="center">
-  <img src="/images/build.jpeg"/>
+  <img src="images/build.jpeg"/>
 </p>
 
 ## The Data Layer
